@@ -20,11 +20,14 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
     Depth.msg
+    Command.msg
 )
 
-# add_service_files(
-#   FILES
-# )
+add_service_files(
+  FILES
+    SetDepth.srv
+    SetVelocity.srv
+)
 
 #add_action_files(
 #  FILES
