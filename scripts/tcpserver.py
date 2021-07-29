@@ -1,8 +1,8 @@
 import rospy
 
 from ros_tcp_endpoint import *
-from winch_controller.msg import Depth, Command
-from winch_controller.srv import SetVelocity
+from winch_controller.msg import Depth
+from winch_controller.srv import WinchTrigger
 
 def main():
     rospy.set_param("/ROS_IP", "127.0.0.1")
@@ -16,8 +16,11 @@ def main():
 
     tcp_server.start({
         'simulator/depth': RosPublisher('simulator/depth', Depth, queue_size=1),
+        'winch/winch_up': UnityService('winch/winch_up', WinchTrigger, tcp_server),
+        'winch/winch_down': UnityService('winch/winch_down', WinchTrigger, tcp_server),
+        'winch/winch_stop': UnityService('winch/winch_stop', WinchTrigger, tcp_server),
         #'simulator/set_velocity': UnityService('simulator/set_velocity', SetVelocity, tcp_server)
-        'simulator/command': RosSubscriber('simulator/command', Command, tcp_server)
+        #'simulator/command': RosSubscriber('simulator/command', Command, tcp_server)
     })
 
     rospy.spin()

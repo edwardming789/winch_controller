@@ -27,6 +27,7 @@ add_service_files(
   FILES
     SetDepth.srv
     SetVelocity.srv
+    WinchTrigger.srv
 )
 
 #add_action_files(
